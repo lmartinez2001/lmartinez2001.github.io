@@ -1,0 +1,16 @@
+Agent-based models (ABMs) and video games, including those taking advantage of virtual reality (VR), have 
+undergone a remarkable parallel evolution, achieving impressive levels of complexity and sophistication. This 
+paper argues that while ABMs prioritize scientific analysis and understanding and VR aims for immersive 
+entertainment, they both simulate artificial worlds and can benefit from closer integration. Coupling both 
+approaches  indeed  opens  interesting  possibilities  for  research  and  development  in  various  fields,  and  in 
+particular education, at the heart of the SIMPLE project, an EU-funded project on the development of digital 
+tools  for  awareness  raising  on  environmental  issues.  However,  existing  tools  often  present  limitations, 
+including  technical  complexity,  limited  functionalities,  and  lack  of  interoperability.  To  address  these 
+challenges, we introduce a novel framework for linking GAMA, a popular ABM platform, with Unity, a 
+widely used game engine. This framework enables seamless data exchange, real-time visualization, and user 
+interaction within VR environments, allowing researchers to leverage the strengths of both ABMs and VR for 
+more impactful and engaging simulations. We demonstrate the capabilities of our framework through two 
+prototypes built to highlight its potential in representing and interacting with complex socio-environmental 
+system models. We conclude by emphasizing the importance of continued collaboration between the ABM 
+and VR communities to develop robust, user-friendly tools, paving the way for a new era of collaborative 
+research and immersive experiences in simulations.
