@@ -418,6 +418,11 @@ a {
     text-align: center;
 }
 
+.footer-note {
+    margin-top: 0.45rem;
+    font-size: 0.84rem;
+}
+
 @media (max-width: 900px) {
     .presentation-content {
         gap: 2rem;
