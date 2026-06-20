@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeJustDance - Music-conditioned dance generation</title>
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="vendor/reveal/white.css">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [["\\(", "\\)"], ["$", "$"]] },
+      svg: { fontCache: "global" }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide dance-title" data-anim="title-teaser">
+        <div class="title-stage">
+          <video class="hero-video" src="assets/videos/slides/main_slide_1.mp4" autoplay muted loop playsinline></video>
+          <div class="hero-scrim"></div>
+          <div class="hero-copy">
+            <p class="eyebrow">Music-conditioned dance generation</p>
+            <div class="title-team" aria-label="Project team">
+              <div class="team-member julien-member">
+                <div class="team-photo-frame"><img src="assets/profile_pics/julien.jpg" alt="Julien"></div>
+                <h3>Julien</h3>
+              </div>
+              <div class="team-member hai-member">
+                <div class="team-photo-frame"><img src="assets/profile_pics/hai.jpeg" alt="Hai"></div>
+                <h3>Hai</h3>
+              </div>
+              <div class="team-member emile-member">
+                <div class="team-photo-frame"><img src="assets/profile_pics/emil.jpg" alt="Emile"></div>
+                <h3>Emile</h3>
+              </div>
+              <div class="team-member louis-member">
+                <div class="team-photo-frame"><img src="assets/profile_pics/louis.jpg" alt="Louis"></div>
+                <h3>Louis</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wave-strip title-wave" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </section>
+
+      <section class="motivation-slide" data-anim="dance-motivation">
+        <h2>Dance Is A Hard Sequence Problem</h2>
+        <div class="motivation-grid">
+          <div class="motivation-lead">
+            <p>Improvising to unheard music is future-motion prediction in disguise.</p>
+            <div class="wave-strip" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <div class="tension-board">
+            <article class="tension-card beat">
+              <span>01</span>
+              <h3>Temporal coherence</h3>
+              <p>A dancer must keep style in memory, react to new musical cues, and anticipate the next motion.</p>
+            </article>
+            <article class="tension-card body fragment" data-fragment-index="0">
+              <span>02</span>
+              <h3>Body dynamics</h3>
+              <p>Steps must remain balanced, grounded, joint-consistent, and physically believable.</p>
+            </article>
+            <article class="tension-card horizon fragment" data-fragment-index="1">
+              <span>03</span>
+              <h3>Coordination and skill</h3>
+              <p>Even trained humans struggle to align rhythm, intention, and full-body control in real time.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="full-video-slide">
+        <video src="assets/videos/slides/mozaic_gt_slide_2.mp4" autoplay muted loop playsinline></video>
+        <div class="ai-question video-question">Can AI models learn to do it?</div>
+      </section>
+
+      <section class="jepa-rescue-slide" data-anim="jepa-rescue">
+        <h2>Music-Aware Motion <em>Representations</em></h2>
+        <div class="rescue-layout">
+          <div class="rescue-diagram">
+            <article class="rescue-node music-action fragment" data-fragment-index="0">
+              <div class="wave-strip compact" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <h3>Music as Action</h3>
+              <p>\(a_t\): the music segment that drives the next movement</p>
+            </article>
+            <div class="rescue-plus fragment" data-fragment-index="0">+</div>
+            <article class="rescue-node pose-state fragment" data-fragment-index="0">
+              <div class="pose-state-video">
+                <video src="assets/edge_smpl2d_front.mp4" autoplay muted loop playsinline></video>
+              </div>
+              <h3>Position as state</h3>
+              <p>\(s_t\): Sequence of 3D body poses</p>
+            </article>
+            <div class="rescue-arrow fragment" data-fragment-index="2">Embed</div>
+            <article class="rescue-node motion-embedding fragment" data-fragment-index="2">
+              <div class="embedding-stack" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <h3>Predict Motion Embeddings</h3>
+              <p>abstract pose into a smoother, predictive target</p>
+            </article>
+          </div>
+          <div class="representation-problem fragment" data-fragment-index="1">
+            <h3>Coordinates are a fragile target</h3>
+            <p>3D coordinates are pose-dependent, local, and sensitive to parameterization choices.</p>
+            <strong>We need a motion representation that makes music actions predictable.</strong>
+          </div>
+        </div>
+        <div class="rescue-question fragment" data-fragment-index="3">
+          How do we learn a good motion representation for music actions?
+        </div>
+      </section>
+
+      <section class="dataset-slide" data-anim="dataset">
+        <h2>Dataset: Paired Music and Motion Windows</h2>
+        <div class="dataset-layout">
+          <div class="dataset-streams">
+            <div class="dataset-track music-track">
+              <div class="dataset-wave" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <span>\(a_t\)</span>
+            </div>
+            <div class="dataset-track motion-track fragment" data-fragment-index="0">
+              <div class="dataset-renders">
+                <img src="latent_motion_current_future4_distinct_points_links.png"
+                  alt="Current and future motion windows">
+              </div>
+              <span>\(s_t \rightarrow s_{t+1}\)</span>
+            </div>
+            <div class="dataset-window fragment" data-fragment-index="1">
+              <span>Context</span>
+              <span>Music Action</span>
+              <span>Future Target</span>
+            </div>
+          </div>
+          <div class="dataset-notes">
+            <article>
+              <h3>AIST++ / SMPL motion</h3>
+              <p>paired choreography, music audio, and 3D body motion aligned on a shared timeline</p>
+            </article>
+            <article class="fragment" data-fragment-index="0">
+              <h3>Training examples</h3>
+              <p>sample temporal windows: current state chunk, next music chunk, future state chunk</p>
+            </article>
+            <article class="fragment" data-fragment-index="1">
+              <h3>Protocol</h3>
+              <p><strong>Hyperparameters:</strong> fps 30, horizon 60, segment length 60, no filtering rules</p>
+            </article>
+          </div>
+        </div>
+        <p class="dataset-citation">Li et al., <em>AIST++: Dance Motion Dataset for Music Conditioned 3D Dance
+            Generation</em>, ICCV 2021. Loper et al., <em>SMPL: A Skinned Multi-Person Linear Model</em>, SIGGRAPH Asia
+          2015.</p>
+      </section>
+
+      <section class="latent-jepa-slide" data-anim="latent-jepa">
+        <h2>JEPA to the Rescue! Predicting Motion in <em>Latent Space</em></h2>
+        <div class="eb-jepa-board">
+          <div class="eb-row eb-context">
+            <div class="eb-motion-input current-motion-input">
+              <img src="assets/latent_motion_current.png" alt="Current SMPL motion chunk">
+              <span>\(s_t\)</span>
+            </div>
+            <div class="eb-arrow"></div>
+            <div class="eb-encoder">\(f_{\theta}\)</div>
+            <div class="eb-arrow"></div>
+            <div class="eb-repr current-state">\(z_t\)</div>
+            <div class="eb-arrow fragment" data-fragment-index="1"></div>
+            <div class="eb-predictor fragment" data-fragment-index="1">\(g_{\phi}\)</div>
+            <div class="eb-arrow fragment" data-fragment-index="1"></div>
+            <div class="eb-repr predicted predicted-state fragment" data-fragment-index="1">\(\hat{z}_{t+1}\)</div>
+          </div>
+          <div class="eb-row eb-action fragment" data-fragment-index="0">
+            <div class="eb-data eb-music">
+              <svg class="music-action-icon" viewBox="0 0 96 96" aria-hidden="true">
+                <path class="music-staff-lines" d="M14 31H82M14 40H82M14 49H82M14 58H82M14 67H82"></path>
+                <path class="music-stem" d="M39 55V28M65 45V22"></path>
+                <path class="music-beam" d="M39 28L65 22"></path>
+                <ellipse class="music-notehead" cx="32" cy="56" rx="9" ry="6" transform="rotate(-18 32 56)"></ellipse>
+                <ellipse class="music-notehead accent" cx="58" cy="46" rx="9" ry="6" transform="rotate(-18 58 46)">
+                </ellipse>
+              </svg>
+              <span>\(a_t\)</span>
+            </div>
+            <div class="eb-action-line fragment" data-fragment-index="1" aria-hidden="true"></div>
+          </div>
+          <div class="eb-row eb-target fragment" data-fragment-index="2">
+            <div class="eb-motion-input future-motion-input">
+              <img src="assets/latent_motion_future.png" alt="Future SMPL motion chunk">
+              <span>\(s_{t+1}\)</span>
+            </div>
+            <div class="eb-arrow"></div>
+            <div class="eb-encoder">\(f_{\theta}\)</div>
+            <div class="eb-arrow"></div>
+            <div class="eb-repr future-state">\(z_{t+1}\)</div>
+          </div>
+          <div class="eb-loss-block fragment" data-fragment-index="3">\(C\)</div>
+          <svg class="eb-loss-lines fragment" data-fragment-index="3" viewBox="0 0 1128 590" aria-hidden="true">
+            <defs>
+              <marker id="loss-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+                <path d="M0,0 L7,3.5 L0,7 z"></path>
+              </marker>
+            </defs>
+            <path d="M1074 207 L1074 400"></path>
+            <path d="M778 455 L1010 455"></path>
+          </svg>
+        </div>
+      </section>
+      <section class="inference-slide" data-anim="inference">
+        <h2>Inference: Autoregressive Music Rollout</h2>
+        <div class="inference-board">
+          <span class="inference-zoom-trigger fragment" data-fragment-index="3" aria-hidden="true"></span>
+          <div class="inference-chain">
+            <div class="inference-state-card">
+              <img src="assets/latent_motion_current.png" alt="Current motion context">
+              <span>\(s_t\)</span>
+            </div>
+            <div class="eb-arrow fragment" data-fragment-index="0"></div>
+            <div class="eb-encoder fragment" data-fragment-index="0">\(f_{\theta}\)</div>
+            <div class="eb-arrow fragment" data-fragment-index="0"></div>
+            <div class="eb-repr current-state fragment" data-fragment-index="0">\(z_t\)</div>
+            <div class="eb-arrow fragment" data-fragment-index="1"></div>
+            <div class="eb-predictor fragment" data-fragment-index="1">\(g_{\phi}\)</div>
+            <div class="eb-arrow fragment" data-fragment-index="1"></div>
+            <div class="eb-repr predicted predicted-state fragment" data-fragment-index="1">\(\hat{z}_{t+1}\)</div>
+          </div>
+          <div class="inference-actions">
+            <div class="inference-action action-one fragment" data-fragment-index="1">
+              <svg class="music-action-icon" viewBox="0 0 96 96" aria-hidden="true">
+                <path class="music-staff-lines" d="M14 31H82M14 40H82M14 49H82M14 58H82M14 67H82"></path>
+                <path class="music-stem" d="M39 55V28M65 45V22"></path>
+                <path class="music-beam" d="M39 28L65 22"></path>
+                <ellipse class="music-notehead" cx="32" cy="56" rx="9" ry="6" transform="rotate(-18 32 56)"></ellipse>
+                <ellipse class="music-notehead accent" cx="58" cy="46" rx="9" ry="6" transform="rotate(-18 58 46)">
+                </ellipse>
+              </svg>
+              <span>\(a_t\)</span>
+            </div>
+          </div>
+          <div class="inference-decoder fragment" data-fragment-index="2">
+            <div class="decoder-block">\(d_{\psi}\)</div>
+            <div class="decoder-output">
+              <img src="assets/latent_motion_future.png" alt="Decoded motion rollout">
+              <span>\(\hat{s}_{t+1}\)</span>
+            </div>
+          </div>
+          <div class="inference-duplicate" aria-hidden="true">
+            <div class="duplicate-chain">
+              <div class="eb-predictor">\(g_{\phi}\)</div>
+              <div class="eb-arrow"></div>
+              <div class="eb-repr predicted predicted-state">\(\hat{z}_{t+2}\)</div>
+            </div>
+            <div class="duplicate-decoder-arrow" aria-hidden="true"></div>
+            <div class="inference-action duplicate-action">
+              <svg class="music-action-icon" viewBox="0 0 96 96" aria-hidden="true">
+                <path class="music-staff-lines" d="M14 31H82M14 40H82M14 49H82M14 58H82M14 67H82"></path>
+                <path class="music-stem" d="M39 55V28M65 45V22"></path>
+                <path class="music-beam" d="M39 28L65 22"></path>
+                <ellipse class="music-notehead" cx="32" cy="56" rx="9" ry="6" transform="rotate(-18 32 56)"></ellipse>
+                <ellipse class="music-notehead accent" cx="58" cy="46" rx="9" ry="6" transform="rotate(-18 58 46)">
+                </ellipse>
+              </svg>
+              <span>\(a_{t+1}\)</span>
+            </div>
+            <div class="duplicate-decoder">
+              <div class="decoder-block">\(d_{\psi}\)</div>
+              <div class="decoder-output">
+                <img src="assets/latent_motion_future.png" alt="">
+                <span>\(\hat{s}_{t+2}\)</span>
+              </div>
+            </div>
+          </div>
+          <div class="inference-duplicate duplicate-third" aria-hidden="true">
+            <div class="duplicate-chain">
+              <div class="eb-predictor">\(g_{\phi}\)</div>
+              <div class="eb-arrow"></div>
+              <div class="eb-repr predicted predicted-state">\(\hat{z}_{t+3}\)</div>
+            </div>
+            <div class="duplicate-decoder-arrow" aria-hidden="true"></div>
+            <div class="inference-action duplicate-action">
+              <svg class="music-action-icon" viewBox="0 0 96 96" aria-hidden="true">
+                <path class="music-staff-lines" d="M14 31H82M14 40H82M14 49H82M14 58H82M14 67H82"></path>
+                <path class="music-stem" d="M39 55V28M65 45V22"></path>
+                <path class="music-beam" d="M39 28L65 22"></path>
+                <ellipse class="music-notehead" cx="32" cy="56" rx="9" ry="6" transform="rotate(-18 32 56)"></ellipse>
+                <ellipse class="music-notehead accent" cx="58" cy="46" rx="9" ry="6" transform="rotate(-18 58 46)">
+                </ellipse>
+              </svg>
+              <span>\(a_{t+2}\)</span>
+            </div>
+            <div class="duplicate-decoder">
+              <div class="decoder-block">\(d_{\psi}\)</div>
+              <div class="decoder-output">
+                <img src="assets/latent_motion_future.png" alt="">
+                <span>\(\hat{s}_{t+3}\)</span>
+              </div>
+            </div>
+          </div>
+          <div class="rollout-ellipsis" aria-hidden="true">...</div>
+        </div>
+      </section>
+      <section class="full-video-slide pred-video-slide">
+        <video class="pred-best-video" src="assets/videos/slides/best_pred_slide_8.mp4" autoplay muted loop
+          playsinline></video>
+        <div class="pred-best-labels" aria-hidden="true">
+          <span>Prediction</span>
+          <span>Ground-Truth</span>
+        </div>
+        <video class="pred-mosaic-video fragment" data-fragment-index="0"
+          src="assets/videos/slides/mozaic_pred_gt_slide_8.mp4" autoplay muted loop playsinline></video>
+      </section>
+      <section class="thank-you-slide">
+        <h2>Thank You</h2>
+      </section>
+    </div>
+  </div>
+
+  <svg class="skeleton-defs" aria-hidden="true">
+    <defs>
+      <g id="skeleton-shape">
+        <line x1="90" y1="44" x2="90" y2="110"></line>
+        <line x1="90" y1="74" x2="52" y2="98"></line>
+        <line x1="90" y1="74" x2="128" y2="98"></line>
+        <line x1="52" y1="98" x2="38" y2="150"></line>
+        <line x1="128" y1="98" x2="144" y2="150"></line>
+        <line x1="90" y1="110" x2="62" y2="166"></line>
+        <line x1="90" y1="110" x2="118" y2="166"></line>
+        <line x1="62" y1="166" x2="54" y2="226"></line>
+        <line x1="118" y1="166" x2="132" y2="226"></line>
+        <circle cx="90" cy="32" r="18"></circle>
+        <circle cx="90" cy="74" r="8"></circle>
+        <circle cx="52" cy="98" r="8"></circle>
+        <circle cx="128" cy="98" r="8"></circle>
+        <circle cx="38" cy="150" r="8"></circle>
+        <circle cx="144" cy="150" r="8"></circle>
+        <circle cx="90" cy="110" r="8"></circle>
+        <circle cx="62" cy="166" r="8"></circle>
+        <circle cx="118" cy="166" r="8"></circle>
+        <circle cx="54" cy="226" r="8"></circle>
+        <circle cx="132" cy="226" r="8"></circle>
+      </g>
+    </defs>
+  </svg>
+
+  <script src="vendor/reveal/reveal.js"></script>
+  <script src="slides.js"></script>
+</body>
+
+</html>
