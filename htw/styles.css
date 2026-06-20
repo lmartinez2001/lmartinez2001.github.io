@@ -566,6 +566,36 @@ body {
   opacity: 0;
 }
 
+.architectural-choices-slide {
+  display: grid !important;
+  align-content: center;
+  gap: 58px;
+}
+
+.architectural-choices-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 42px;
+  width: min(960px, 82%);
+  margin: 0 auto;
+}
+
+.architectural-choices-grid article {
+  display: grid;
+  place-items: center;
+  min-height: 190px;
+  padding: 28px 24px;
+  border: 4px solid #20282d;
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  font-size: 34px;
+  line-height: 1.14;
+  font-weight: 900;
+  text-align: center;
+  box-shadow: 0 16px 28px rgba(20, 31, 43, 0.1);
+}
+
 .usecases-slide {
   position: relative;
 }
