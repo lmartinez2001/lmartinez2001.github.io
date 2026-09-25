@@ -19,8 +19,8 @@
     --content-width: 1140px;
     --profile-size: clamp(170px, 17vw, 230px);
     --profile-zoom: 1.5;
-    --profile-shift-x: 0px;
-    --profile-shift-y: 10px;
+    --profile-shift-x: -5%;
+    --profile-shift-y: 23%;
 }
 
 html {
