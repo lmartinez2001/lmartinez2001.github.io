@@ -351,6 +351,11 @@ a {
     line-height: 1.65;
 }
 
+.publication-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
 .publication-conference {
     margin-top: 0.45rem;
     color: var(--text);
