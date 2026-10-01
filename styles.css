@@ -13,7 +13,7 @@
     --accent: #8a6424;
     --accent-hover: #6e4e18;
     --content-width: 760px;
-    --profile-size: 136px;
+    --profile-size: 184px;
     --profile-zoom: 1.5;
     --profile-shift-x: -5%;
     --profile-shift-y: 23%;
@@ -216,9 +216,10 @@ section h2 {
 }
 
 .publication-image {
-    width: 280px;
-    height: 170px;
-    flex: 0 0 280px;
+    width: clamp(200px, 40%, 280px);
+    height: auto;
+    aspect-ratio: 28 / 17;
+    flex: 0 0 auto;
     border-radius: 6px;
     border: 1px solid var(--rule);
     object-fit: cover;
@@ -247,7 +248,7 @@ section h2 {
     font-size: 0.85rem;
 }
 
-.tag + .tag::before {
+.tag:not(:last-child)::after {
     content: "·";
     margin: 0 0.45rem;
 }
@@ -309,7 +310,11 @@ section h2 {
 
 @media (max-width: 640px) {
     .container {
-        padding-top: 2.75rem;
+        padding: 2.75rem 1.25rem 0;
+    }
+
+    .copyright {
+        padding: 1.5rem 1.25rem 3rem;
     }
 
     .presentation-content {
@@ -318,7 +323,7 @@ section h2 {
     }
 
     :root {
-        --profile-size: 104px;
+        --profile-size: 144px;
     }
 
     .presentation-text h1 {
@@ -340,8 +345,6 @@ section h2 {
 
     .publication-image {
         width: 100%;
-        height: auto;
-        flex-basis: auto;
         aspect-ratio: 2 / 1;
     }
 }
