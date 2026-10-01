@@ -115,6 +115,19 @@ section h2,
     text-wrap: balance;
 }
 
+.org-link {
+    color: inherit;
+    white-space: nowrap;
+}
+
+.org-logo {
+    display: inline-block;
+    width: 1.35em;
+    height: 1.35em;
+    margin: 0 0.3em 0 0.1em;
+    vertical-align: -0.33em;
+}
+
 .presentation-text p {
     font-size: 1.05rem;
 }
